@@ -222,9 +222,13 @@ public class Logger implements Closeable, AutoCloseable {
 	 * close the logger at the end of execution 
 	 */
 	@Override
-	public void close() throws IOException {
+	public void close() {
 		log(Level.GENERIC, "-----end-----" + lineSep, true);
-		stream.close();
+		try {
+			stream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		isClosed = true;
 	}
 	
