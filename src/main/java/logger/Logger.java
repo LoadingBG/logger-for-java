@@ -466,7 +466,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -483,7 +486,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -500,7 +506,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -517,7 +526,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -534,7 +546,7 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); if (index > -1) {res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -551,7 +563,7 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); if (index > -1) {res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -568,7 +580,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -585,7 +600,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -602,7 +620,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -619,7 +640,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -636,7 +660,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -653,7 +680,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -670,7 +700,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -687,7 +720,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -704,7 +740,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -721,7 +760,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -738,7 +780,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), false);
 	}
@@ -755,7 +800,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.INFO, res.toString(), true);
 	}
@@ -948,7 +996,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -965,7 +1016,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -982,7 +1036,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -999,7 +1056,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1016,7 +1076,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1033,7 +1096,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1050,7 +1116,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1067,7 +1136,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1084,7 +1156,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1101,7 +1176,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1118,7 +1196,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1135,7 +1216,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1152,7 +1236,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1169,7 +1256,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1186,7 +1276,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1203,7 +1296,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1220,7 +1316,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), false);
 	}
@@ -1237,7 +1336,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.DEBUG, res.toString(), true);
 	}
@@ -1428,7 +1530,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1445,7 +1550,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1462,7 +1570,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1479,7 +1590,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1496,7 +1610,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1513,7 +1630,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1530,7 +1650,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1547,7 +1670,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1564,7 +1690,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1581,7 +1710,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1598,7 +1730,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1615,7 +1750,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1632,7 +1770,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1649,7 +1790,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1666,7 +1810,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1683,7 +1830,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1700,7 +1850,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), false);
 	}
@@ -1717,7 +1870,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.WARNING, res.toString(), true);
 	}
@@ -1909,7 +2065,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -1926,7 +2085,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(bool).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -1943,7 +2105,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -1960,7 +2125,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(byteInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -1977,7 +2145,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -1994,7 +2165,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(shortInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -2011,7 +2185,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -2028,7 +2205,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(integer).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -2045,7 +2225,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -2062,7 +2245,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(longInteger).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -2079,7 +2265,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -2096,7 +2285,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(floatFraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -2113,7 +2305,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -2130,7 +2325,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(fraction).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -2147,7 +2345,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -2164,7 +2365,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(character).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
@@ -2181,7 +2385,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), false);
 	}
@@ -2198,7 +2405,10 @@ public class Logger implements Closeable, AutoCloseable {
 			res.append(object).append(", ");
 		}
 		
-		res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		int index = res.lastIndexOf(","); 
+		if (index > -1) {
+			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2).append("}");
+		}
 		
 		log(Level.ERROR, res.toString(), true);
 	}
