@@ -464,7 +464,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.INFO, builder.toString(), false);
@@ -480,7 +480,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.INFO, builder.toString(), true);
@@ -1050,7 +1050,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.DEBUG, builder.toString(), false);
@@ -1066,7 +1066,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.DEBUG, builder.toString(), true);
@@ -1634,7 +1634,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.WARNING, builder.toString(), false);
@@ -1650,7 +1650,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.WARNING, builder.toString(), true);
@@ -2219,7 +2219,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.ERROR, builder.toString(), false);
@@ -2235,7 +2235,7 @@ public class Logger implements Closeable, AutoCloseable {
 		builder.append(throwable.toString());
 		
 		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element);
+			builder.append("\tat ").append(element).append("\n");
 		}
 		
 		log(Level.ERROR, builder.toString(), true);
