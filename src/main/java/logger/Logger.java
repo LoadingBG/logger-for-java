@@ -455,6 +455,38 @@ public class Logger implements Closeable, AutoCloseable {
 	}
 	
 	/**
+	 * Logs the throwable without a new line with severity level of INFO.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void info(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.INFO, builder.toString(), false);
+	}
+	
+	/**
+	 * Logs the throwable with a new line with severity level of INFO.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void infoln(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.INFO, builder.toString(), true);
+	}
+	
+	/**
 	 * Logs the boolean array without a new line with severity level of INFO. 
 	 * 
 	 * @param boolArray The boolean array.
@@ -982,6 +1014,38 @@ public class Logger implements Closeable, AutoCloseable {
 		} else {
 			log(Level.DEBUG, object.toString(), true);
 		}
+	}
+	
+	/**
+	 * Logs the throwable without a new line with severity level of DEBUG.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void debug(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.DEBUG, builder.toString(), false);
+	}
+	
+	/**
+	 * Logs the throwable with a new line with severity level of DEBUG.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void debugln(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.DEBUG, builder.toString(), true);
 	}
 	
 	/**
@@ -1519,6 +1583,38 @@ public class Logger implements Closeable, AutoCloseable {
 	}
 	
 	/**
+	 * Logs the throwable without a new line with severity level of WARNING.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void warning(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.WARNING, builder.toString(), false);
+	}
+	
+	/**
+	 * Logs the throwable with a new line with severity level of WARNING.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void warningln(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.WARNING, builder.toString(), true);
+	}
+	
+	/**
 	 * Logs the boolean array without a new line with severity level of WARNING. 
 	 * 
 	 * @param boolArray The boolean array.
@@ -2051,6 +2147,38 @@ public class Logger implements Closeable, AutoCloseable {
 		} else {
 			log(Level.ERROR, object.toString(), true);
 		}
+	}
+	
+	/**
+	 * Logs the throwable without a new line with severity level of ERROR.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void error(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.ERROR, builder.toString(), false);
+	}
+	
+	/**
+	 * Logs the throwable with a new line with severity level of ERROR.
+	 * 
+	 * @param throwable The throwable.
+	 */
+	public void errorln(Throwable throwable) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(throwable.toString());
+		
+		for (StackTraceElement element : throwable.getStackTrace()) {
+			builder.append("\tat ").append(element);
+		}
+		
+		log(Level.ERROR, builder.toString(), true);
 	}
 	
 	/**
