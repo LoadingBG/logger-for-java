@@ -19,14 +19,13 @@ import java.util.Locale;
  * with the given name if there is no .log file with the same name. 
  * The path to a folder can be specified to search for the .log file there.</p>
  * 
- * <p>The logger can log in 4 different levels:
+ * <p>The logger can log in 4 different levels:</p>
  * <ul>
  * 	<li>INFO: used to log information.</li>
  * 	<li>DEBUG: used to log debugging information.</li>
  * 	<li>WARNING: used to log warnings.</li>
  * 	<li>ERROR: used to log errors.</li>
  * </ul>
- * </p>
  */
 public class Logger implements Closeable, AutoCloseable {
 	/**
@@ -169,7 +168,7 @@ public class Logger implements Closeable, AutoCloseable {
 			stream = new FileOutputStream(file, true);
 			
 			// Log the date
-			log(Level.GENERIC, dateMaker.createDate(), true);
+			log(Level.GENERIC, dateMaker.createDate());
 		} catch (IOException $) {
 			// Not possible because of creation of file
 		} catch (SecurityException e) {
@@ -213,7 +212,7 @@ public class Logger implements Closeable, AutoCloseable {
 		dateMaker = new DateMaker(locale);
 		ansiMode = ansi;
 		
-		log(Level.GENERIC, dateMaker.createDate(), true);
+		log(Level.GENERIC, dateMaker.createDate());
 	}
 	
 	/**
@@ -223,11 +222,11 @@ public class Logger implements Closeable, AutoCloseable {
 	 */
 	@Override
 	public void close() {
-		log(Level.GENERIC, "-----end-----" + lineSep, true);
+		log(Level.GENERIC, "-----end-----" + lineSep);
 		try {
 			stream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			err(e);
 		}
 		isClosed = true;
 	}
@@ -247,10 +246,8 @@ public class Logger implements Closeable, AutoCloseable {
 	 * 
 	 * @param level The level of the message.
 	 * @param message The message.
-	 * @param newLine Whether or not a new line character 
-	 * 	should be added to the end of the line.
 	 */
-	void log(Level level, String message, boolean newLine) {
+	void log(Level level, String message) {
 		try {
 			// If the logger is not closed
 			if (!isClosed) {
@@ -269,7 +266,7 @@ public class Logger implements Closeable, AutoCloseable {
 				String newMessage = message.replaceAll("\n|\r\n?", lineSep + spaces)
 						+ (ansiMode ? "\u001b[0m" : "");
 				stream.write(newMessage.getBytes());
-				stream.write((newLine ? lineSep : "").getBytes());
+				stream.write(lineSep.getBytes());
 				// Flush
 				stream.flush();
 			} else {
@@ -285,177 +282,92 @@ public class Logger implements Closeable, AutoCloseable {
 	
 	
 	/**
-	 * Logs the boolean without a new line with a severity level of INFO.
+	 * Logs the boolean with a severity level of INFO.
 	 * 
 	 * @param bool The boolean.
 	 */
 	public void info(boolean bool) {
-		log(Level.INFO, Boolean.toString(bool), false);
+		log(Level.INFO, Boolean.toString(bool));
 	}
 	
 	/**
-	 * Logs the boolean with a new line with a severity level of INFO.
-	 * 
-	 * @param bool The boolean.
-	 */
-	public void infoln(boolean bool) {
-		log(Level.INFO, Boolean.toString(bool), true);
-	}
-	
-	/**
-	 * Logs the byte without a new line with a severity level of INFO.
+	 * Logs the byte with a severity level of INFO.
 	 * 
 	 * @param byteInteger The byte.
 	 */
 	public void info(byte byteInteger) {
-		log(Level.INFO, Byte.toString(byteInteger), false);
+		log(Level.INFO, Byte.toString(byteInteger));
 	}
 	
 	/**
-	 * Logs the byte with a new line with a severity level of INFO.
-	 * 
-	 * @param byteInteger The byte.
-	 */
-	public void infoln(byte byteInteger) {
-		log(Level.INFO, Byte.toString(byteInteger), true);
-	}
-	
-	/**
-	 * Logs the short without a new line with a severity level of INFO.
+	 * Logs the short with a severity level of INFO.
 	 * 
 	 * @param shortInteger The short.
 	 */
 	public void info(short shortInteger) {
-		log(Level.INFO, Short.toString(shortInteger), false);
+		log(Level.INFO, Short.toString(shortInteger));
 	}
 	
 	/**
-	 * Logs the short with a new line with a severity level of INFO.
-	 * 
-	 * @param shortInteger The short.
-	 */
-	public void infoln(short shortInteger) {
-		log(Level.INFO, Short.toString(shortInteger), true);
-	}
-	
-	/**
-	 * Logs the int without a new line with a severity level of INFO.
+	 * Logs the int with a severity level of INFO.
 	 * 
 	 * @param integer The int.
 	 */
 	public void info(int integer) {
-		log(Level.INFO, Integer.toString(integer), false);
+		log(Level.INFO, Integer.toString(integer));
 	}
 	
 	/**
-	 * Logs the int with a new line with a severity level of INFO.
-	 * 
-	 * @param integer The int.
-	 */
-	public void infoln(int integer) {
-		log(Level.INFO, Integer.toString(integer), true);
-	}
-	
-	/**
-	 * Logs the long without a new line with a severity level of INFO.
+	 * Logs the long with a severity level of INFO.
 	 * 
 	 * @param longInteger The long.
 	 */
 	public void info(long longInteger) {
-		log(Level.INFO, Long.toString(longInteger), false);
+		log(Level.INFO, Long.toString(longInteger));
 	}
 	
 	/**
-	 * Logs the long with a new line with a severity level of INFO.
-	 * 
-	 * @param longInteger The long.
-	 */
-	public void infoln(long longInteger) {
-		log(Level.INFO, Long.toString(longInteger), true);
-	}
-	
-	/**
-	 * Logs the float without a new line with a severity level of INFO.
+	 * Logs the float with a severity level of INFO.
 	 * 
 	 * @param floatFraction The float.
 	 */
 	public void info(float floatFraction) {
-		log(Level.INFO, Float.toString(floatFraction), false);
+		log(Level.INFO, Float.toString(floatFraction));
 	}
 	
 	/**
-	 * Logs the float with a new line with a severity level of INFO.
-	 * 
-	 * @param floatFraction The float.
-	 */
-	public void infoln(float floatFraction) {
-		log(Level.INFO, Float.toString(floatFraction), true);
-	}
-	
-	/**
-	 * Logs the double without a new line with a severity level of INFO.
+	 * Logs the double with a severity level of INFO.
 	 * 
 	 * @param fraction The double.
 	 */
 	public void info(double fraction) {
-		log(Level.INFO, Double.toString(fraction), false);
+		log(Level.INFO, Double.toString(fraction));
 	}
 	
 	/**
-	 * Logs the double with a new line with a severity level of INFO.
-	 * 
-	 * @param fraction The double.
-	 */
-	public void infoln(double fraction) {
-		log(Level.INFO, Double.toString(fraction), true);
-	}
-	
-	/**
-	 * Logs the char without a new line with a severity level of INFO.
+	 * Logs the char with a severity level of INFO.
 	 * 
 	 * @param character The char.
 	 */
 	public void info(char character) {
-		log(Level.INFO, Character.toString(character), false);
+		log(Level.INFO, Character.toString(character));
 	}
 	
 	/**
-	 * Logs the char with a new line with a severity level of INFO.
-	 * 
-	 * @param character The char.
-	 */
-	public void infoln(char character) {
-		log(Level.INFO, Character.toString(character), true);
-	}
-	
-	/**
-	 * Logs the object without a new line with severity level of INFO.
+	 * Logs the object with severity level of INFO.
 	 * 
 	 * @param object The object.
 	 */
 	public void info(Object object) {
 		if (object == null) {
-			log(Level.INFO, "null", false);
+			log(Level.INFO, "null");
 		} else {
-			log(Level.INFO, object.toString(), false);
+			log(Level.INFO, object.toString());
 		}
 	}
 	
 	/**
-	 * Logs the object with a new line with severity level of INFO.
-	 * 
-	 * @param object The object.
-	 */
-	public void infoln(Object object) {
-		if (object == null) {
-			log(Level.INFO, "null", true);
-		} else {
-			log(Level.INFO, object.toString(), true);
-		}
-	}
-	
-	/**
-	 * Logs the throwable without a new line with severity level of INFO.
+	 * Logs the throwable with severity level of INFO.
 	 * 
 	 * @param throwable The throwable.
 	 */
@@ -467,27 +379,11 @@ public class Logger implements Closeable, AutoCloseable {
 			builder.append("\tat ").append(element).append("\n");
 		}
 		
-		log(Level.INFO, builder.toString(), false);
+		log(Level.INFO, builder.toString());
 	}
 	
 	/**
-	 * Logs the throwable with a new line with severity level of INFO.
-	 * 
-	 * @param throwable The throwable.
-	 */
-	public void infoln(Throwable throwable) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(throwable.toString());
-		
-		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element).append("\n");
-		}
-		
-		log(Level.INFO, builder.toString(), true);
-	}
-	
-	/**
-	 * Logs the boolean array without a new line with severity level of INFO. 
+	 * Logs the boolean array with severity level of INFO. 
 	 * 
 	 * @param boolArray The boolean array.
 	 */
@@ -504,32 +400,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the boolean array with a new line with severity level of INFO. 
-	 * 
-	 * @param boolArray The boolean array.
-	 */
-	public void infoln(boolean[] boolArray) {
-		StringBuilder res = new StringBuilder("boolean[] {");
-		
-		for (boolean bool : boolArray) {
-			res.append(bool).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the byte array without a new line with severity level of INFO. 
+	 * Logs the byte array with severity level of INFO. 
 	 * 
 	 * @param byteArray The byte array.
 	 */
@@ -546,32 +421,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the byte array with a new line with severity level of INFO. 
-	 * 
-	 * @param byteArray The byte array.
-	 */
-	public void infoln(byte[] byteArray) {
-		StringBuilder res = new StringBuilder("byte[] {");
-		
-		for (byte byteInteger : byteArray) {
-			res.append(byteInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the short array without a new line with severity level of INFO. 
+	 * Logs the short array with severity level of INFO. 
 	 * 
 	 * @param shortArray The short array.
 	 */
@@ -588,32 +442,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the short array with a new line with severity level of INFO. 
-	 * 
-	 * @param shortArray The short array.
-	 */
-	public void infoln(short[] shortArray) {
-		StringBuilder res = new StringBuilder("short[] {");
-		
-		for (short shortInteger : shortArray) {
-			res.append(shortInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the int array without a new line with severity level of INFO. 
+	 * Logs the int array with severity level of INFO. 
 	 * 
 	 * @param intArray The int array.
 	 */
@@ -630,32 +463,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the int array with a new line with severity level of INFO. 
-	 * 
-	 * @param intArray The int array.
-	 */
-	public void infoln(int[] intArray) {
-		StringBuilder res = new StringBuilder("int[] {");
-		
-		for (int integer : intArray) {
-			res.append(integer).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the long array without a new line with severity level of INFO. 
+	 * Logs the long array with severity level of INFO. 
 	 * 
 	 * @param longArray The long array.
 	 */
@@ -672,32 +484,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the long array with a new line with severity level of INFO. 
-	 * 
-	 * @param longArray The long array.
-	 */
-	public void infoln(long[] longArray) {
-		StringBuilder res = new StringBuilder("long[] {");
-		
-		for (long longInteger : longArray) {
-			res.append(longInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the float array without a new line with severity level of INFO. 
+	 * Logs the float array with severity level of INFO. 
 	 * 
 	 * @param floatArray The float array.
 	 */
@@ -714,32 +505,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the float array with a new line with severity level of INFO. 
-	 * 
-	 * @param floatArray The float array.
-	 */
-	public void infoln(float[] floatArray) {
-		StringBuilder res = new StringBuilder("float[] {");
-		
-		for (float floatFraction : floatArray) {
-			res.append(floatFraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the double array without a new line with severity level of INFO. 
+	 * Logs the double array with severity level of INFO. 
 	 * 
 	 * @param doubleArray The double array.
 	 */
@@ -756,32 +526,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the double array with a new line with severity level of INFO. 
-	 * 
-	 * @param doubleArray The double array.
-	 */
-	public void infoln(double[] doubleArray) {
-		StringBuilder res = new StringBuilder("double[] {");
-		
-		for (double fraction : doubleArray) {
-			res.append(fraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the char array without a new line with severity level of INFO. 
+	 * Logs the char array with severity level of INFO. 
 	 * 
 	 * @param charArray The char array.
 	 */
@@ -798,32 +547,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
+		log(Level.INFO, res.toString());
 	}
 	
 	/**
-	 * Logs the char array with a new line with severity level of INFO. 
-	 * 
-	 * @param charArray The char array.
-	 */
-	public void infoln(char[] charArray) {
-		StringBuilder res = new StringBuilder("char[] {");
-		
-		for (char character : charArray) {
-			res.append(character).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the object array without a new line with severity level INFO.
+	 * Logs the object array with severity level INFO.
 	 * 
 	 * @param objectArray The object array.
 	 */
@@ -840,28 +568,7 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.INFO, res.toString(), false);
-	}
-	
-	/**
-	 * Logs the object array with a new line with severity level INFO.
-	 * 
-	 * @param objectArray The object array.
-	 */
-	public void infoln(Object[] objectArray) {
-		StringBuilder res = new StringBuilder("Object[] {");
-		
-		for (Object object : objectArray) {
-			res.append(object).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.INFO, res.toString(), true);
+		log(Level.INFO, res.toString());
 	}
 	
 	
@@ -871,177 +578,92 @@ public class Logger implements Closeable, AutoCloseable {
 	
 	
 	/**
-	 * Logs the boolean without a new line with a severity level of DEBUG.
+	 * Logs the boolean with a severity level of DEBUG.
 	 * 
 	 * @param bool The boolean.
 	 */
 	public void debug(boolean bool) {
-		log(Level.DEBUG, Boolean.toString(bool), false);
+		log(Level.DEBUG, Boolean.toString(bool));
 	}
 	
 	/**
-	 * Logs the boolean with a new line with a severity level of DEBUG.
-	 * 
-	 * @param bool The boolean.
-	 */
-	public void debugln(boolean bool) {
-		log(Level.DEBUG, Boolean.toString(bool), true);
-	}
-	
-	/**
-	 * Logs the byte without a new line with a severity level of DEBUG.
+	 * Logs the byte with a severity level of DEBUG.
 	 * 
 	 * @param byteInteger The byte.
 	 */
 	public void debug(byte byteInteger) {
-		log(Level.DEBUG, Byte.toString(byteInteger), false);
+		log(Level.DEBUG, Byte.toString(byteInteger));
 	}
 	
 	/**
-	 * Logs the byte with a new line with a severity level of DEBUG.
-	 * 
-	 * @param byteInteger The byte.
-	 */
-	public void debugln(byte byteInteger) {
-		log(Level.DEBUG, Byte.toString(byteInteger), true);
-	}
-	
-	/**
-	 * Logs the short without a new line with a severity level of DEBUG.
+	 * Logs the short with a severity level of DEBUG.
 	 * 
 	 * @param shortInteger The short.
 	 */
 	public void debug(short shortInteger) {
-		log(Level.DEBUG, Short.toString(shortInteger), false);
+		log(Level.DEBUG, Short.toString(shortInteger));
 	}
 	
 	/**
-	 * Logs the short with a new line with a severity level of DEBUG.
-	 * 
-	 * @param shortInteger The short.
-	 */
-	public void debugln(short shortInteger) {
-		log(Level.DEBUG, Short.toString(shortInteger), true);
-	}
-	
-	/**
-	 * Logs the int without a new line with a severity level of DEBUG.
+	 * Logs the int with a severity level of DEBUG.
 	 * 
 	 * @param integer The int.
 	 */
 	public void debug(int integer) {
-		log(Level.DEBUG, Integer.toString(integer), false);
+		log(Level.DEBUG, Integer.toString(integer));
 	}
 	
 	/**
-	 * Logs the int with a new line with a severity level of DEBUG.
-	 * 
-	 * @param integer The int.
-	 */
-	public void debugln(int integer) {
-		log(Level.DEBUG, Integer.toString(integer), true);
-	}
-	
-	/**
-	 * Logs the long without a new line with a severity level of DEBUG.
+	 * Logs the long with a severity level of DEBUG.
 	 * 
 	 * @param longInteger The long.
 	 */
 	public void debug(long longInteger) {
-		log(Level.DEBUG, Long.toString(longInteger), false);
+		log(Level.DEBUG, Long.toString(longInteger));
 	}
 	
 	/**
-	 * Logs the long with a new line with a severity level of DEBUG.
-	 * 
-	 * @param longInteger The long.
-	 */
-	public void debugln(long longInteger) {
-		log(Level.DEBUG, Long.toString(longInteger), true);
-	}
-	
-	/**
-	 * Logs the float without a new line with a severity level of DEBUG.
+	 * Logs the float with a severity level of DEBUG.
 	 * 
 	 * @param floatFraction The float.
 	 */
 	public void debug(float floatFraction) {
-		log(Level.DEBUG, Float.toString(floatFraction), false);
+		log(Level.DEBUG, Float.toString(floatFraction));
 	}
 	
 	/**
-	 * Logs the float with a new line with a severity level of DEBUG.
-	 * 
-	 * @param floatFraction The float.
-	 */
-	public void debugln(float floatFraction) {
-		log(Level.DEBUG, Float.toString(floatFraction), true);
-	}
-	
-	/**
-	 * Logs the double without a new line with a severity level of DEBUG.
+	 * Logs the double with a severity level of DEBUG.
 	 * 
 	 * @param fraction The double.
 	 */
 	public void debug(double fraction) {
-		log(Level.DEBUG, Double.toString(fraction), false);
+		log(Level.DEBUG, Double.toString(fraction));
 	}
 	
 	/**
-	 * Logs the double with a new line with a severity level of DEBUG.
-	 * 
-	 * @param fraction The double.
-	 */
-	public void debugln(double fraction) {
-		log(Level.DEBUG, Double.toString(fraction), true);
-	}
-	
-	/**
-	 * Logs the char without a new line with a severity level of DEBUG.
+	 * Logs the char with a severity level of DEBUG.
 	 * 
 	 * @param character The char.
 	 */
 	public void debug(char character) {
-		log(Level.DEBUG, Character.toString(character), false);
+		log(Level.DEBUG, Character.toString(character));
 	}
 	
 	/**
-	 * Logs the char with a new line with a severity level of DEBUG.
-	 * 
-	 * @param character The char.
-	 */
-	public void debugln(char character) {
-		log(Level.DEBUG, Character.toString(character), true);
-	}
-	
-	/**
-	 * Logs the object without a new line with severity level of DEBUG.
+	 * Logs the object with severity level of DEBUG.
 	 * 
 	 * @param object The object.
 	 */
 	public void debug(Object object) {
 		if (object == null) {
-			log(Level.DEBUG, "null", false);
+			log(Level.DEBUG, "null");
 		} else {
-			log(Level.DEBUG, object.toString(), false);
+			log(Level.DEBUG, object.toString());
 		}
 	}
 	
 	/**
-	 * Logs the object with a new line with severity level of DEBUG.
-	 * 
-	 * @param object The object.
-	 */
-	public void debugln(Object object) {
-		if (object == null) {
-			log(Level.DEBUG, "null", true);
-		} else {
-			log(Level.DEBUG, object.toString(), true);
-		}
-	}
-	
-	/**
-	 * Logs the throwable without a new line with severity level of DEBUG.
+	 * Logs the throwable with severity level of DEBUG.
 	 * 
 	 * @param throwable The throwable.
 	 */
@@ -1053,27 +675,11 @@ public class Logger implements Closeable, AutoCloseable {
 			builder.append("\tat ").append(element).append("\n");
 		}
 		
-		log(Level.DEBUG, builder.toString(), false);
+		log(Level.DEBUG, builder.toString());
 	}
 	
 	/**
-	 * Logs the throwable with a new line with severity level of DEBUG.
-	 * 
-	 * @param throwable The throwable.
-	 */
-	public void debugln(Throwable throwable) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(throwable.toString());
-		
-		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element).append("\n");
-		}
-		
-		log(Level.DEBUG, builder.toString(), true);
-	}
-	
-	/**
-	 * Logs the boolean array without a new line with severity level of DEBUG. 
+	 * Logs the boolean array with severity level of DEBUG. 
 	 * 
 	 * @param boolArray The boolean array.
 	 */
@@ -1090,32 +696,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the boolean array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param boolArray The boolean array.
-	 */
-	public void debugln(boolean[] boolArray) {
-		StringBuilder res = new StringBuilder("boolean[] {");
-		
-		for (boolean bool : boolArray) {
-			res.append(bool).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the byte array without a new line with severity level of DEBUG. 
+	 * Logs the byte array with severity level of DEBUG. 
 	 * 
 	 * @param byteArray The byte array.
 	 */
@@ -1132,32 +717,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the byte array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param byteArray The byte array.
-	 */
-	public void debugln(byte[] byteArray) {
-		StringBuilder res = new StringBuilder("byte[] {");
-		
-		for (byte byteInteger : byteArray) {
-			res.append(byteInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the short array without a new line with severity level of DEBUG. 
+	 * Logs the short array with severity level of DEBUG. 
 	 * 
 	 * @param shortArray The short array.
 	 */
@@ -1174,32 +738,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the short array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param shortArray The short array.
-	 */
-	public void debugln(short[] shortArray) {
-		StringBuilder res = new StringBuilder("short[] {");
-		
-		for (short shortInteger : shortArray) {
-			res.append(shortInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the int array without a new line with severity level of DEBUG. 
+	 * Logs the int array with severity level of DEBUG. 
 	 * 
 	 * @param intArray The int array.
 	 */
@@ -1216,32 +759,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the int array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param intArray The int array.
-	 */
-	public void debugln(int[] intArray) {
-		StringBuilder res = new StringBuilder("int[] {");
-		
-		for (int integer : intArray) {
-			res.append(integer).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the long array without a new line with severity level of DEBUG. 
+	 * Logs the long array with severity level of DEBUG. 
 	 * 
 	 * @param longArray The long array.
 	 */
@@ -1258,32 +780,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the long array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param longArray The long array.
-	 */
-	public void debugln(long[] longArray) {
-		StringBuilder res = new StringBuilder("long[] {");
-		
-		for (long longInteger : longArray) {
-			res.append(longInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the float array without a new line with severity level of DEBUG. 
+	 * Logs the float array with severity level of DEBUG. 
 	 * 
 	 * @param floatArray The float array.
 	 */
@@ -1300,32 +801,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the float array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param floatArray The float array.
-	 */
-	public void debugln(float[] floatArray) {
-		StringBuilder res = new StringBuilder("float[] {");
-		
-		for (float floatFraction : floatArray) {
-			res.append(floatFraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the double array without a new line with severity level of DEBUG. 
+	 * Logs the double array with severity level of DEBUG. 
 	 * 
 	 * @param doubleArray The double array.
 	 */
@@ -1342,32 +822,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the double array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param doubleArray The double array.
-	 */
-	public void debugln(double[] doubleArray) {
-		StringBuilder res = new StringBuilder("double[] {");
-		
-		for (double fraction : doubleArray) {
-			res.append(fraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the char array without a new line with severity level of DEBUG. 
+	 * Logs the char array with severity level of DEBUG. 
 	 * 
 	 * @param charArray The char array.
 	 */
@@ -1384,32 +843,11 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	/**
-	 * Logs the char array with a new line with severity level of DEBUG. 
-	 * 
-	 * @param charArray The char array.
-	 */
-	public void debugln(char[] charArray) {
-		StringBuilder res = new StringBuilder("char[] {");
-		
-		for (char character : charArray) {
-			res.append(character).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the object array without a new line with severity level DEBUG.
+	 * Logs the object array with severity level DEBUG.
 	 * 
 	 * @param objectArray The object array.
 	 */
@@ -1426,28 +864,7 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.DEBUG, res.toString(), false);
-	}
-	
-	/**
-	 * Logs the object array with a new line with severity level DEBUG.
-	 * 
-	 * @param objectArray The object array.
-	 */
-	public void debugln(Object[] objectArray) {
-		StringBuilder res = new StringBuilder("Object[] {");
-		
-		for (Object object : objectArray) {
-			res.append(object).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.DEBUG, res.toString(), true);
+		log(Level.DEBUG, res.toString());
 	}
 	
 	
@@ -1455,181 +872,96 @@ public class Logger implements Closeable, AutoCloseable {
 	
 	
 	/**
-	 * Logs the boolean without a new line with a severity level of WARNING.
+	 * Logs the boolean with a severity level of WARNING.
 	 * 
 	 * @param bool The boolean.
 	 */
-	public void warning(boolean bool) {
-		log(Level.WARNING, Boolean.toString(bool), false);
+	public void warn(boolean bool) {
+		log(Level.WARNING, Boolean.toString(bool));
 	}
 	
 	/**
-	 * Logs the boolean with a new line with a severity level of WARNING.
-	 * 
-	 * @param bool The boolean.
-	 */
-	public void warningln(boolean bool) {
-		log(Level.WARNING, Boolean.toString(bool), true);
-	}
-	
-	/**
-	 * Logs the byte without a new line with a severity level of WARNING.
+	 * Logs the byte with a severity level of WARNING.
 	 * 
 	 * @param byteInteger The byte.
 	 */
-	public void warning(byte byteInteger) {
-		log(Level.WARNING, Byte.toString(byteInteger), false);
+	public void warn(byte byteInteger) {
+		log(Level.WARNING, Byte.toString(byteInteger));
 	}
 	
 	/**
-	 * Logs the byte with a new line with a severity level of WARNING.
-	 * 
-	 * @param byteInteger The byte.
-	 */
-	public void warningln(byte byteInteger) {
-		log(Level.WARNING, Byte.toString(byteInteger), true);
-	}
-	
-	/**
-	 * Logs the short without a new line with a severity level of WARNING.
+	 * Logs the short with a severity level of WARNING.
 	 * 
 	 * @param shortInteger The short.
 	 */
-	public void warning(short shortInteger) {
-		log(Level.WARNING, Short.toString(shortInteger), false);
+	public void warn(short shortInteger) {
+		log(Level.WARNING, Short.toString(shortInteger));
 	}
 	
 	/**
-	 * Logs the short with a new line with a severity level of WARNING.
-	 * 
-	 * @param shortInteger The short.
-	 */
-	public void warningln(short shortInteger) {
-		log(Level.WARNING, Short.toString(shortInteger), true);
-	}
-	
-	/**
-	 * Logs the int without a new line with a severity level of WARNING.
+	 * Logs the int with a severity level of WARNING.
 	 * 
 	 * @param integer The int.
 	 */
-	public void warning(int integer) {
-		log(Level.WARNING, Integer.toString(integer), false);
+	public void warn(int integer) {
+		log(Level.WARNING, Integer.toString(integer));
 	}
 	
 	/**
-	 * Logs the int with a new line with a severity level of WARNING.
-	 * 
-	 * @param integer The int.
-	 */
-	public void warningln(int integer) {
-		log(Level.WARNING, Integer.toString(integer), true);
-	}
-	
-	/**
-	 * Logs the long without a new line with a severity level of WARNING.
+	 * Logs the long with a severity level of WARNING.
 	 * 
 	 * @param longInteger The long.
 	 */
-	public void warning(long longInteger) {
-		log(Level.WARNING, Long.toString(longInteger), false);
+	public void warn(long longInteger) {
+		log(Level.WARNING, Long.toString(longInteger));
 	}
 	
 	/**
-	 * Logs the long with a new line with a severity level of WARNING.
-	 * 
-	 * @param longInteger The long.
-	 */
-	public void warningln(long longInteger) {
-		log(Level.WARNING, Long.toString(longInteger), true);
-	}
-	
-	/**
-	 * Logs the float without a new line with a severity level of WARNING.
+	 * Logs the float with a severity level of WARNING.
 	 * 
 	 * @param floatFraction The float.
 	 */
-	public void warning(float floatFraction) {
-		log(Level.WARNING, Float.toString(floatFraction), false);
+	public void warn(float floatFraction) {
+		log(Level.WARNING, Float.toString(floatFraction));
 	}
 	
 	/**
-	 * Logs the float with a new line with a severity level of WARNING.
-	 * 
-	 * @param floatFraction The float.
-	 */
-	public void warningln(float floatFraction) {
-		log(Level.WARNING, Float.toString(floatFraction), true);
-	}
-	
-	/**
-	 * Logs the double without a new line with a severity level of WARNING.
+	 * Logs the double with a severity level of WARNING.
 	 * 
 	 * @param fraction The double.
 	 */
-	public void warning(double fraction) {
-		log(Level.WARNING, Double.toString(fraction), false);
+	public void warn(double fraction) {
+		log(Level.WARNING, Double.toString(fraction));
 	}
 	
 	/**
-	 * Logs the double with a new line with a severity level of WARNING.
-	 * 
-	 * @param fraction The double.
-	 */
-	public void warningln(double fraction) {
-		log(Level.WARNING, Double.toString(fraction), true);
-	}
-	
-	/**
-	 * Logs the char without a new line with a severity level of WARNING.
+	 * Logs the char with a severity level of WARNING.
 	 * 
 	 * @param character The char.
 	 */
-	public void warning(char character) {
-		log(Level.WARNING, Character.toString(character), false);
+	public void warn(char character) {
+		log(Level.WARNING, Character.toString(character));
 	}
 	
 	/**
-	 * Logs the char with a new line with a severity level of WARNING.
-	 * 
-	 * @param character The char.
-	 */
-	public void warningln(char character) {
-		log(Level.WARNING, Character.toString(character), true);
-	}
-	
-	/**
-	 * Logs the object without a new line with severity level of WARNING.
+	 * Logs the object with severity level of WARNING.
 	 * 
 	 * @param object The object.
 	 */
-	public void warning(Object object) {
+	public void warn(Object object) {
 		if (object == null) {
-			log(Level.WARNING, "null", false);
+			log(Level.WARNING, "null");
 		} else {
-			log(Level.WARNING, object.toString(), false);
+			log(Level.WARNING, object.toString());
 		}
 	}
 	
 	/**
-	 * Logs the object with a new line with severity level of WARNING.
-	 * 
-	 * @param object The object.
-	 */
-	public void warningln(Object object) {
-		if (object == null) {
-			log(Level.WARNING, "null", true);
-		} else {
-			log(Level.WARNING, object.toString(), true);
-		}
-	}
-	
-	/**
-	 * Logs the throwable without a new line with severity level of WARNING.
+	 * Logs the throwable with severity level of WARNING.
 	 * 
 	 * @param throwable The throwable.
 	 */
-	public void warning(Throwable throwable) {
+	public void warn(Throwable throwable) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(throwable.toString());
 		
@@ -1637,31 +969,15 @@ public class Logger implements Closeable, AutoCloseable {
 			builder.append("\tat ").append(element).append("\n");
 		}
 		
-		log(Level.WARNING, builder.toString(), false);
+		log(Level.WARNING, builder.toString());
 	}
 	
 	/**
-	 * Logs the throwable with a new line with severity level of WARNING.
-	 * 
-	 * @param throwable The throwable.
-	 */
-	public void warningln(Throwable throwable) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(throwable.toString());
-		
-		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element).append("\n");
-		}
-		
-		log(Level.WARNING, builder.toString(), true);
-	}
-	
-	/**
-	 * Logs the boolean array without a new line with severity level of WARNING. 
+	 * Logs the boolean array with severity level of WARNING. 
 	 * 
 	 * @param boolArray The boolean array.
 	 */
-	public void warning(boolean[] boolArray) {
+	public void warn(boolean[] boolArray) {
 		StringBuilder res = new StringBuilder("boolean[] {");
 		
 		for (boolean bool : boolArray) {
@@ -1674,36 +990,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the boolean array with a new line with severity level of WARNING. 
-	 * 
-	 * @param boolArray The boolean array.
-	 */
-	public void warningln(boolean[] boolArray) {
-		StringBuilder res = new StringBuilder("boolean[] {");
-		
-		for (boolean bool : boolArray) {
-			res.append(bool).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the byte array without a new line with severity level of WARNING. 
+	 * Logs the byte array with severity level of WARNING. 
 	 * 
 	 * @param byteArray The byte array.
 	 */
-	public void warning(byte[] byteArray) {
+	public void warn(byte[] byteArray) {
 		StringBuilder res = new StringBuilder("byte[] {");
 		
 		for (byte byteInteger : byteArray) {
@@ -1716,36 +1011,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the byte array with a new line with severity level of WARNING. 
-	 * 
-	 * @param byteArray The byte array.
-	 */
-	public void warningln(byte[] byteArray) {
-		StringBuilder res = new StringBuilder("byte[] {");
-		
-		for (byte byteInteger : byteArray) {
-			res.append(byteInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the short array without a new line with severity level of WARNING. 
+	 * Logs the short array with severity level of WARNING. 
 	 * 
 	 * @param shortArray The short array.
 	 */
-	public void warning(short[] shortArray) {
+	public void warn(short[] shortArray) {
 		StringBuilder res = new StringBuilder("short[] {");
 		
 		for (short shortInteger : shortArray) {
@@ -1758,36 +1032,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the short array with a new line with severity level of WARNING. 
-	 * 
-	 * @param shortArray The short array.
-	 */
-	public void warningln(short[] shortArray) {
-		StringBuilder res = new StringBuilder("short[] {");
-		
-		for (short shortInteger : shortArray) {
-			res.append(shortInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the int array without a new line with severity level of WARNING. 
+	 * Logs the int array with severity level of WARNING. 
 	 * 
 	 * @param intArray The int array.
 	 */
-	public void warning(int[] intArray) {
+	public void warn(int[] intArray) {
 		StringBuilder res = new StringBuilder("int[] {");
 		
 		for (int integer : intArray) {
@@ -1800,36 +1053,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the int array with a new line with severity level of WARNING. 
-	 * 
-	 * @param intArray The int array.
-	 */
-	public void warningln(int[] intArray) {
-		StringBuilder res = new StringBuilder("int[] {");
-		
-		for (int integer : intArray) {
-			res.append(integer).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the long array without a new line with severity level of WARNING. 
+	 * Logs the long array with severity level of WARNING. 
 	 * 
 	 * @param longArray The long array.
 	 */
-	public void warning(long[] longArray) {
+	public void warn(long[] longArray) {
 		StringBuilder res = new StringBuilder("long[] {");
 		
 		for (long longInteger : longArray) {
@@ -1842,36 +1074,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the long array with a new line with severity level of WARNING. 
-	 * 
-	 * @param longArray The long array.
-	 */
-	public void warningln(long[] longArray) {
-		StringBuilder res = new StringBuilder("long[] {");
-		
-		for (long longInteger : longArray) {
-			res.append(longInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the float array without a new line with severity level of WARNING. 
+	 * Logs the float array with severity level of WARNING. 
 	 * 
 	 * @param floatArray The float array.
 	 */
-	public void warning(float[] floatArray) {
+	public void warn(float[] floatArray) {
 		StringBuilder res = new StringBuilder("float[] {");
 		
 		for (float floatFraction : floatArray) {
@@ -1884,36 +1095,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the float array with a new line with severity level of WARNING. 
-	 * 
-	 * @param floatArray The float array.
-	 */
-	public void warningln(float[] floatArray) {
-		StringBuilder res = new StringBuilder("float[] {");
-		
-		for (float floatFraction : floatArray) {
-			res.append(floatFraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the double array without a new line with severity level of WARNING. 
+	 * Logs the double array with severity level of WARNING. 
 	 * 
 	 * @param doubleArray The double array.
 	 */
-	public void warning(double[] doubleArray) {
+	public void warn(double[] doubleArray) {
 		StringBuilder res = new StringBuilder("double[] {");
 		
 		for (double fraction : doubleArray) {
@@ -1926,36 +1116,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the double array with a new line with severity level of WARNING. 
-	 * 
-	 * @param doubleArray The double array.
-	 */
-	public void warningln(double[] doubleArray) {
-		StringBuilder res = new StringBuilder("double[] {");
-		
-		for (double fraction : doubleArray) {
-			res.append(fraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the char array without a new line with severity level of WARNING. 
+	 * Logs the char array with severity level of WARNING. 
 	 * 
 	 * @param charArray The char array.
 	 */
-	public void warning(char[] charArray) {
+	public void warn(char[] charArray) {
 		StringBuilder res = new StringBuilder("char[] {");
 		
 		for (char character : charArray) {
@@ -1968,36 +1137,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
+		log(Level.WARNING, res.toString());
 	}
 	
 	/**
-	 * Logs the char array with a new line with severity level of WARNING. 
-	 * 
-	 * @param charArray The char array.
-	 */
-	public void warningln(char[] charArray) {
-		StringBuilder res = new StringBuilder("char[] {");
-		
-		for (char character : charArray) {
-			res.append(character).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the object array without a new line with severity level WARNING.
+	 * Logs the object array with severity level WARNING.
 	 * 
 	 * @param objectArray The object array.
 	 */
-	public void warning(Object[] objectArray) {
+	public void warn(Object[] objectArray) {
 		StringBuilder res = new StringBuilder("Object[] {");
 		
 		for (Object object : objectArray) {
@@ -2010,211 +1158,104 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.WARNING, res.toString(), false);
-	}
-	
-	/**
-	 * Logs the object array with a new line with severity level WARNING.
-	 * 
-	 * @param objectArray The object array.
-	 */
-	public void warningln(Object[] objectArray) {
-		StringBuilder res = new StringBuilder("Object[] {");
-		
-		for (Object object : objectArray) {
-			res.append(object).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.WARNING, res.toString(), true);
+		log(Level.WARNING, res.toString());
 	}
 	
 	
 	
 	
 	
-	
 	/**
-	 * Logs the boolean without a new line with a severity level of ERROR.
+	 * Logs the boolean with a severity level of ERROR.
 	 * 
 	 * @param bool The boolean.
 	 */
-	public void error(boolean bool) {
-		log(Level.ERROR, Boolean.toString(bool), false);
+	public void err(boolean bool) {
+		log(Level.ERROR, Boolean.toString(bool));
 	}
 	
 	/**
-	 * Logs the boolean with a new line with a severity level of ERROR.
-	 * 
-	 * @param bool The boolean.
-	 */
-	public void errorln(boolean bool) {
-		log(Level.ERROR, Boolean.toString(bool), true);
-	}
-	
-	/**
-	 * Logs the byte without a new line with a severity level of ERROR.
+	 * Logs the byte with a severity level of ERROR.
 	 * 
 	 * @param byteInteger The byte.
 	 */
-	public void error(byte byteInteger) {
-		log(Level.ERROR, Byte.toString(byteInteger), false);
+	public void err(byte byteInteger) {
+		log(Level.ERROR, Byte.toString(byteInteger));
 	}
 	
 	/**
-	 * Logs the byte with a new line with a severity level of ERROR.
-	 * 
-	 * @param byteInteger The byte.
-	 */
-	public void errorln(byte byteInteger) {
-		log(Level.ERROR, Byte.toString(byteInteger), true);
-	}
-	
-	/**
-	 * Logs the short without a new line with a severity level of ERROR.
+	 * Logs the short with a severity level of ERROR.
 	 * 
 	 * @param shortInteger The short.
 	 */
-	public void error(short shortInteger) {
-		log(Level.ERROR, Short.toString(shortInteger), false);
+	public void err(short shortInteger) {
+		log(Level.ERROR, Short.toString(shortInteger));
 	}
 	
 	/**
-	 * Logs the short with a new line with a severity level of ERROR.
-	 * 
-	 * @param shortInteger The short.
-	 */
-	public void errorln(short shortInteger) {
-		log(Level.ERROR, Short.toString(shortInteger), true);
-	}
-	
-	/**
-	 * Logs the int without a new line with a severity level of ERROR.
+	 * Logs the int with a severity level of ERROR.
 	 * 
 	 * @param integer The int.
 	 */
-	public void error(int integer) {
-		log(Level.ERROR, Integer.toString(integer), false);
+	public void err(int integer) {
+		log(Level.ERROR, Integer.toString(integer));
 	}
 	
 	/**
-	 * Logs the int with a new line with a severity level of ERROR.
-	 * 
-	 * @param integer The int.
-	 */
-	public void errorln(int integer) {
-		log(Level.ERROR, Integer.toString(integer), true);
-	}
-	
-	/**
-	 * Logs the long without a new line with a severity level of ERROR.
+	 * Logs the long with a severity level of ERROR.
 	 * 
 	 * @param longInteger The long.
 	 */
-	public void error(long longInteger) {
-		log(Level.ERROR, Long.toString(longInteger), false);
+	public void err(long longInteger) {
+		log(Level.ERROR, Long.toString(longInteger));
 	}
 	
 	/**
-	 * Logs the long with a new line with a severity level of ERROR.
-	 * 
-	 * @param longInteger The long.
-	 */
-	public void errorln(long longInteger) {
-		log(Level.ERROR, Long.toString(longInteger), true);
-	}
-	
-	/**
-	 * Logs the float without a new line with a severity level of ERROR.
+	 * Logs the float with a severity level of ERROR.
 	 * 
 	 * @param floatFraction The float.
 	 */
-	public void error(float floatFraction) {
-		log(Level.ERROR, Float.toString(floatFraction), false);
+	public void err(float floatFraction) {
+		log(Level.ERROR, Float.toString(floatFraction));
 	}
 	
 	/**
-	 * Logs the float with a new line with a severity level of ERROR.
-	 * 
-	 * @param floatFraction The float.
-	 */
-	public void errorln(float floatFraction) {
-		log(Level.ERROR, Float.toString(floatFraction), true);
-	}
-	
-	/**
-	 * Logs the double without a new line with a severity level of ERROR.
+	 * Logs the double with a severity level of ERROR.
 	 * 
 	 * @param fraction The double.
 	 */
-	public void error(double fraction) {
-		log(Level.ERROR, Double.toString(fraction), false);
+	public void err(double fraction) {
+		log(Level.ERROR, Double.toString(fraction));
 	}
 	
 	/**
-	 * Logs the double with a new line with a severity level of ERROR.
-	 * 
-	 * @param fraction The double.
-	 */
-	public void errorln(double fraction) {
-		log(Level.ERROR, Double.toString(fraction), true);
-	}
-	
-	/**
-	 * Logs the char without a new line with a severity level of ERROR.
+	 * Logs the char with a severity level of ERROR.
 	 * 
 	 * @param character The char.
 	 */
-	public void error(char character) {
-		log(Level.ERROR, Character.toString(character), false);
+	public void err(char character) {
+		log(Level.ERROR, Character.toString(character));
 	}
 	
 	/**
-	 * Logs the char with a new line with a severity level of ERROR.
-	 * 
-	 * @param character The char.
-	 */
-	public void errorln(char character) {
-		log(Level.ERROR, Character.toString(character), true);
-	}
-	
-	/**
-	 * Logs the object without a new line with severity level of ERROR.
+	 * Logs the object with severity level of ERROR.
 	 * 
 	 * @param object The object.
 	 */
-	public void error(Object object) {
+	public void err(Object object) {
 		if (object == null) {
-			log(Level.ERROR, "null", false);
+			log(Level.ERROR, "null");
 		} else {
-			log(Level.ERROR, object.toString(), false);
+			log(Level.ERROR, object.toString());
 		}
 	}
 	
 	/**
-	 * Logs the object with a new line with severity level of ERROR.
-	 * 
-	 * @param object The object.
-	 */
-	public void errorln(Object object) {
-		if (object == null) {
-			log(Level.ERROR, "null", true);
-		} else {
-			log(Level.ERROR, object.toString(), true);
-		}
-	}
-	
-	/**
-	 * Logs the throwable without a new line with severity level of ERROR.
+	 * Logs the throwable with severity level of ERROR.
 	 * 
 	 * @param throwable The throwable.
 	 */
-	public void error(Throwable throwable) {
+	public void err(Throwable throwable) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(throwable.toString());
 		
@@ -2222,31 +1263,15 @@ public class Logger implements Closeable, AutoCloseable {
 			builder.append("\tat ").append(element).append("\n");
 		}
 		
-		log(Level.ERROR, builder.toString(), false);
+		log(Level.ERROR, builder.toString());
 	}
 	
 	/**
-	 * Logs the throwable with a new line with severity level of ERROR.
-	 * 
-	 * @param throwable The throwable.
-	 */
-	public void errorln(Throwable throwable) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(throwable.toString());
-		
-		for (StackTraceElement element : throwable.getStackTrace()) {
-			builder.append("\tat ").append(element).append("\n");
-		}
-		
-		log(Level.ERROR, builder.toString(), true);
-	}
-	
-	/**
-	 * Logs the boolean array without a new line with severity level of ERROR. 
+	 * Logs the boolean array with severity level of ERROR. 
 	 * 
 	 * @param boolArray The boolean array.
 	 */
-	public void error(boolean[] boolArray) {
+	public void err(boolean[] boolArray) {
 		StringBuilder res = new StringBuilder("boolean[] {");
 		
 		for (boolean bool : boolArray) {
@@ -2259,36 +1284,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the boolean array with a new line with severity level of ERROR. 
-	 * 
-	 * @param boolArray The boolean array.
-	 */
-	public void errorln(boolean[] boolArray) {
-		StringBuilder res = new StringBuilder("boolean[] {");
-		
-		for (boolean bool : boolArray) {
-			res.append(bool).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the byte array without a new line with severity level of ERROR. 
+	 * Logs the byte array with severity level of ERROR. 
 	 * 
 	 * @param byteArray The byte array.
 	 */
-	public void error(byte[] byteArray) {
+	public void err(byte[] byteArray) {
 		StringBuilder res = new StringBuilder("byte[] {");
 		
 		for (byte byteInteger : byteArray) {
@@ -2301,36 +1305,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the byte array with a new line with severity level of ERROR. 
-	 * 
-	 * @param byteArray The byte array.
-	 */
-	public void errorln(byte[] byteArray) {
-		StringBuilder res = new StringBuilder("byte[] {");
-		
-		for (byte byteInteger : byteArray) {
-			res.append(byteInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the short array without a new line with severity level of ERROR. 
+	 * Logs the short array with severity level of ERROR. 
 	 * 
 	 * @param shortArray The short array.
 	 */
-	public void error(short[] shortArray) {
+	public void err(short[] shortArray) {
 		StringBuilder res = new StringBuilder("short[] {");
 		
 		for (short shortInteger : shortArray) {
@@ -2343,36 +1326,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the short array with a new line with severity level of ERROR. 
-	 * 
-	 * @param shortArray The short array.
-	 */
-	public void errorln(short[] shortArray) {
-		StringBuilder res = new StringBuilder("short[] {");
-		
-		for (short shortInteger : shortArray) {
-			res.append(shortInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the int array without a new line with severity level of ERROR. 
+	 * Logs the int array with severity level of ERROR. 
 	 * 
 	 * @param intArray The int array.
 	 */
-	public void error(int[] intArray) {
+	public void err(int[] intArray) {
 		StringBuilder res = new StringBuilder("int[] {");
 		
 		for (int integer : intArray) {
@@ -2385,36 +1347,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the int array with a new line with severity level of ERROR. 
-	 * 
-	 * @param intArray The int array.
-	 */
-	public void errorln(int[] intArray) {
-		StringBuilder res = new StringBuilder("int[] {");
-		
-		for (int integer : intArray) {
-			res.append(integer).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the long array without a new line with severity level of ERROR. 
+	 * Logs the long array with severity level of ERROR. 
 	 * 
 	 * @param longArray The long array.
 	 */
-	public void error(long[] longArray) {
+	public void err(long[] longArray) {
 		StringBuilder res = new StringBuilder("long[] {");
 		
 		for (long longInteger : longArray) {
@@ -2427,36 +1368,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the long array with a new line with severity level of ERROR. 
-	 * 
-	 * @param longArray The long array.
-	 */
-	public void errorln(long[] longArray) {
-		StringBuilder res = new StringBuilder("long[] {");
-		
-		for (long longInteger : longArray) {
-			res.append(longInteger).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the float array without a new line with severity level of ERROR. 
+	 * Logs the float array with severity level of ERROR. 
 	 * 
 	 * @param floatArray The float array.
 	 */
-	public void error(float[] floatArray) {
+	public void err(float[] floatArray) {
 		StringBuilder res = new StringBuilder("float[] {");
 		
 		for (float floatFraction : floatArray) {
@@ -2469,36 +1389,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the float array with a new line with severity level of ERROR. 
-	 * 
-	 * @param floatArray The float array.
-	 */
-	public void errorln(float[] floatArray) {
-		StringBuilder res = new StringBuilder("float[] {");
-		
-		for (float floatFraction : floatArray) {
-			res.append(floatFraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the double array without a new line with severity level of ERROR. 
+	 * Logs the double array with severity level of ERROR. 
 	 * 
 	 * @param doubleArray The double array.
 	 */
-	public void error(double[] doubleArray) {
+	public void err(double[] doubleArray) {
 		StringBuilder res = new StringBuilder("double[] {");
 		
 		for (double fraction : doubleArray) {
@@ -2511,36 +1410,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the double array with a new line with severity level of ERROR. 
-	 * 
-	 * @param doubleArray The double array.
-	 */
-	public void errorln(double[] doubleArray) {
-		StringBuilder res = new StringBuilder("double[] {");
-		
-		for (double fraction : doubleArray) {
-			res.append(fraction).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the char array without a new line with severity level of ERROR. 
+	 * Logs the char array with severity level of ERROR. 
 	 * 
 	 * @param charArray The char array.
 	 */
-	public void error(char[] charArray) {
+	public void err(char[] charArray) {
 		StringBuilder res = new StringBuilder("char[] {");
 		
 		for (char character : charArray) {
@@ -2553,36 +1431,15 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
+		log(Level.ERROR, res.toString());
 	}
 	
 	/**
-	 * Logs the char array with a new line with severity level of ERROR. 
-	 * 
-	 * @param charArray The char array.
-	 */
-	public void errorln(char[] charArray) {
-		StringBuilder res = new StringBuilder("char[] {");
-		
-		for (char character : charArray) {
-			res.append(character).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
-	}
-	
-	/**
-	 * Logs the object array without a new line with severity level ERROR.
+	 * Logs the object array with severity level ERROR.
 	 * 
 	 * @param objectArray The object array.
 	 */
-	public void error(Object[] objectArray) {
+	public void err(Object[] objectArray) {
 		StringBuilder res = new StringBuilder("Object[] {");
 		
 		for (Object object : objectArray) {
@@ -2595,27 +1452,6 @@ public class Logger implements Closeable, AutoCloseable {
 		}
 		res.append("}");
 		
-		log(Level.ERROR, res.toString(), false);
-	}
-	
-	/**
-	 * Logs the object array with a new line with severity level ERROR.
-	 * 
-	 * @param objectArray The object array.
-	 */
-	public void errorln(Object[] objectArray) {
-		StringBuilder res = new StringBuilder("Object[] {");
-		
-		for (Object object : objectArray) {
-			res.append(object).append(", ");
-		}
-		
-		int index = res.lastIndexOf(","); 
-		if (index > -1) {
-			res.delete(res.lastIndexOf(","), res.lastIndexOf(",") + 2);
-		}
-		res.append("}");
-		
-		log(Level.ERROR, res.toString(), true);
+		log(Level.ERROR, res.toString());
 	}
 }
